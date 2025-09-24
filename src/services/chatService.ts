@@ -53,7 +53,7 @@ export class ChatService {
   }
 
   // Mock LLM response for development
-  private static getMockResponse(userMessage: string): ChatMessage {
+  private static getMockResponse(_userMessage: string): ChatMessage {
     const responses = [
       "I can see your expense patterns. You're spending quite a bit on dining out this month. Would you like me to create a chart showing your food expenses over time?",
       "Based on your expense data, I notice transportation costs have increased by 20% compared to last month. This could be due to rising gas prices.",

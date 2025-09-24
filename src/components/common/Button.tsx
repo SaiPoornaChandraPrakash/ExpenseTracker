@@ -87,6 +87,7 @@ interface ButtonProps {
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   type?: 'button' | 'submit' | 'reset';
   className?: string;
+  style?: React.CSSProperties;
 }
 
 export const Button: React.FC<ButtonProps> = ({
@@ -98,7 +99,8 @@ export const Button: React.FC<ButtonProps> = ({
   loading = false,
   onClick,
   type = 'button',
-  className
+  className,
+  style
 }) => {
   return (
     <ButtonBase
@@ -109,6 +111,7 @@ export const Button: React.FC<ButtonProps> = ({
       onClick={onClick}
       type={type}
       className={className}
+      style={style}
     >
       {loading && <span>⏳</span>}
       {children}

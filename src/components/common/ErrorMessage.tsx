@@ -37,7 +37,7 @@ const ErrorIcon = styled.span`
   font-weight: bold;
 `;
 
-const ErrorMessage = styled.span`
+const ErrorText = styled.span`
   flex: 1;
   font-size: 14px;
 `;
@@ -83,7 +83,7 @@ export const ErrorMessage: React.FC<ErrorMessageProps> = ({
   return (
     <ErrorContainer variant={variant} className={className}>
       <ErrorIcon>{getIcon()}</ErrorIcon>
-      <ErrorMessage>{message}</ErrorMessage>
+      <ErrorText>{message}</ErrorText>
       {onClose && (
         <CloseButton onClick={onClose}>
           ×

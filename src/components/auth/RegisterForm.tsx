@@ -22,7 +22,7 @@ const RegisterTitle = styled.h2`
   font-weight: 600;
 `;
 
-const RegisterForm = styled.form`
+const StyledRegisterForm = styled.form`
   display: flex;
   flex-direction: column;
 `;
@@ -122,7 +122,7 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ onSwitchToLogin }) =
       
       {error && <ErrorMessage message={error} onClose={clearError} />}
       
-      <RegisterForm onSubmit={handleSubmit}>
+      <StyledRegisterForm onSubmit={handleSubmit}>
         <Input
           label="Full Name"
           type="text"
@@ -172,7 +172,7 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ onSwitchToLogin }) =
         >
           Create Account
         </Button>
-      </RegisterForm>
+      </StyledRegisterForm>
       
       <SwitchText>
         Already have an account?{' '}

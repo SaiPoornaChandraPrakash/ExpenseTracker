@@ -22,7 +22,7 @@ const LoginTitle = styled.h2`
   font-weight: 600;
 `;
 
-const LoginForm = styled.form`
+const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
 `;
@@ -108,7 +108,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSwitchToRegister }) => {
       
       {error && <ErrorMessage message={error} onClose={clearError} />}
       
-      <LoginForm onSubmit={handleSubmit}>
+      <StyledForm onSubmit={handleSubmit}>
         <Input
           label="Email"
           type="email"
@@ -137,7 +137,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSwitchToRegister }) => {
         >
           Sign In
         </Button>
-      </LoginForm>
+      </StyledForm>
       
       <SwitchText>
         Don't have an account?{' '}

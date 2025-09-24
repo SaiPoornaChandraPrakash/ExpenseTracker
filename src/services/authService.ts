@@ -31,6 +31,10 @@ export class AuthService {
       
       return { success: true, data: { user, token } };
     } catch (error: any) {
+      // For development, use mock authentication when backend is not available
+      if (error.code === 'ERR_CONNECTION_REFUSED' || error.message?.includes('Network Error')) {
+        return this.mockLogin(credentials);
+      }
       return { 
         success: false, 
         error: error.response?.data?.message || 'Login failed' 
@@ -49,6 +53,10 @@ export class AuthService {
       
       return { success: true, data: { user, token } };
     } catch (error: any) {
+      // For development, use mock authentication when backend is not available
+      if (error.code === 'ERR_CONNECTION_REFUSED' || error.message?.includes('Network Error')) {
+        return this.mockRegister(credentials);
+      }
       return { 
         success: false, 
         error: error.response?.data?.message || 'Registration failed' 
@@ -96,6 +104,53 @@ export class AuthService {
 
   static isAuthenticated(): boolean {
     return !!this.getStoredToken();
+  }
+
+  // Mock authentication methods for development
+  private static mockLogin(credentials: LoginCredentials): ApiResponse<{ user: User; token: string }> {
+    // Simple mock validation
+    if (!credentials.email || !credentials.password) {
+      return { success: false, error: 'Email and password are required' };
+    }
+
+    const mockUser: User = {
+      id: '1',
+      email: credentials.email,
+      name: credentials.email.split('@')[0].replace(/[._]/g, ' '),
+    };
+
+    const mockToken = 'mock_token_' + Date.now();
+
+    // Store in localStorage
+    localStorage.setItem('auth_token', mockToken);
+    localStorage.setItem('user', JSON.stringify(mockUser));
+
+    return { success: true, data: { user: mockUser, token: mockToken } };
+  }
+
+  private static mockRegister(credentials: RegisterCredentials): ApiResponse<{ user: User; token: string }> {
+    // Simple mock validation
+    if (!credentials.name || !credentials.email || !credentials.password) {
+      return { success: false, error: 'All fields are required' };
+    }
+
+    if (credentials.password !== credentials.confirmPassword) {
+      return { success: false, error: 'Passwords do not match' };
+    }
+
+    const mockUser: User = {
+      id: '1',
+      email: credentials.email,
+      name: credentials.name,
+    };
+
+    const mockToken = 'mock_token_' + Date.now();
+
+    // Store in localStorage
+    localStorage.setItem('auth_token', mockToken);
+    localStorage.setItem('user', JSON.stringify(mockUser));
+
+    return { success: true, data: { user: mockUser, token: mockToken } };
   }
 }
 
